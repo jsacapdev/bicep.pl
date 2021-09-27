@@ -2,6 +2,10 @@
 
 A simple first pass over bicep.
 
+Pipeline | Status |
+-|-|
+infrastructure | [![Build Status](https://capgeminiuk.visualstudio.com/bicep.pl/_apis/build/status/infrastructure?branchName=main)](https://capgeminiuk.visualstudio.com/bicep.pl/_build/latest?definitionId=259&branchName=main)
+
 <https://github.com/Azure/bicep/blob/main/docs/tutorial/01-simple-template.md>
 
 Has things like:
