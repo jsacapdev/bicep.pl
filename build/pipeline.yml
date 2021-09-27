@@ -4,6 +4,10 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  azureSubscription: 'rg-bicep-dev-001-sp'  
+  productName: arm
+
 stages:
 - stage: Build
   displayName: Build
@@ -33,25 +37,21 @@ stages:
         artifactName: 'arm'
         publishLocation: 'Container'
 
-# - stage: Deploy
-#   displayName: Deploy
-#   jobs:
-#   - deployment: DeployInfrastructure
-#     displayName: Deploy Infrastructure
-#     timeoutInMinutes: 120 # api management can take a while
-#     pool:
-#       vmImage: 'Ubuntu-18.04'    
-#     environment: $(environmentName)
-#     strategy: 
-#       runOnce:
-#         deploy:
-#           steps:
-#           - task: AzureCLI@2
-#             displayName: 'deploy infrastructure'
-#             inputs:
-#               azureSubscription: $(azureSubscription)
-#               scriptType: pscore
-#               scriptPath: '../$(productName)/deploy/deploy.ps1'
-#               arguments: '-ResourceGroupName "$(resourceGroupName)"'
-#               workingDirectory: '../$(productName)/deploy'
-#             condition: always()
+- stage: Deploy
+  displayName: Deploy
+  jobs:
+  - deployment: DeployInfrastructure
+    displayName: Deploy Infrastructure
+    environment: dev
+    strategy: 
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureCLI@2
+            displayName: 'deploy infrastructure'
+            inputs:
+              azureSubscription: $(azureSubscription)
+              scriptType: pscore
+              inlineScript: 'ls -al'
+              workingDirectory: '../$(productName)'
+            condition: always()
