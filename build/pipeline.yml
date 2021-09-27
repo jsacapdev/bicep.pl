@@ -23,14 +23,14 @@ stages:
     - task: PublishBuildArtifacts@1
       displayName: 'publish function api artifacts'
       inputs:
-        pathToPublish: '$(Build.ArtifactStagingDirectory)/apis'
+        pathToPublish: '$(Build.ArtifactStagingDirectory)/arm'
         ArtifactName: $(productName)
 
     - task: PublishBuildArtifacts@1
       displayName: 'publish test artifacts'
       inputs:
-        pathToPublish: '$(Build.ArtifactStagingDirectory)/tests'
-        artifactName: '$(productName)_tests'
+        pathToPublish: '$(Build.ArtifactStagingDirectory)'
+        artifactName: 'arm'
         publishLocation: 'Container'
 
 # - stage: Deploy
