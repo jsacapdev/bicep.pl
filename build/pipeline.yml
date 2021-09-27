@@ -1,0 +1,57 @@
+trigger:
+- none
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+- stage: Build
+  displayName: Build
+  jobs:
+  - job: Build
+    displayName: Build
+    workspace:
+      clean: all    
+    steps:
+    - task: CopyFiles@2
+      displayName: 'pack infrastructure as code'
+      inputs:
+        SourceFolder: src/arm
+        Contents: '*'
+        TargetFolder: '$(build.artifactstagingdirectory)/arm'
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'publish function api artifacts'
+      inputs:
+        pathToPublish: '$(Build.ArtifactStagingDirectory)/apis'
+        ArtifactName: $(productName)
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'publish test artifacts'
+      inputs:
+        pathToPublish: '$(Build.ArtifactStagingDirectory)/tests'
+        artifactName: '$(productName)_tests'
+        publishLocation: 'Container'
+
+# - stage: Deploy
+#   displayName: Deploy
+#   jobs:
+#   - deployment: DeployInfrastructure
+#     displayName: Deploy Infrastructure
+#     timeoutInMinutes: 120 # api management can take a while
+#     pool:
+#       vmImage: 'Ubuntu-18.04'    
+#     environment: $(environmentName)
+#     strategy: 
+#       runOnce:
+#         deploy:
+#           steps:
+#           - task: AzureCLI@2
+#             displayName: 'deploy infrastructure'
+#             inputs:
+#               azureSubscription: $(azureSubscription)
+#               scriptType: pscore
+#               scriptPath: '../$(productName)/deploy/deploy.ps1'
+#               arguments: '-ResourceGroupName "$(resourceGroupName)"'
+#               workingDirectory: '../$(productName)/deploy'
+#             condition: always()
