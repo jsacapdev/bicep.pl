@@ -42,6 +42,7 @@ stages:
   displayName: Deploy
   variables:
     resourceGroupName: 'rg-bicep-$(environment)-001'
+    environment: dev
   jobs:
   - deployment: DeployInfrastructure
     displayName: Deploy Infrastructure
