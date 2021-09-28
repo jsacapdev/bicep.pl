@@ -60,5 +60,6 @@ stages:
               inlineScript: |
                 az -v
                 az group create -n $(resourceGroupName) -l $(location)
+                az deployment group create -f ./main.bicep -g $(resourceGroupName) --parameters environment=$(environment)
               workingDirectory: '../$(productName)'
             condition: always()
