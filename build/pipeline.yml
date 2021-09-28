@@ -40,11 +40,12 @@ stages:
 
 - stage: Deploy
   displayName: Deploy
+  variables:
+    resourceGroupName: 'rg-bicep-$(environment)-001'
   jobs:
   - deployment: DeployInfrastructure
     displayName: Deploy Infrastructure
     environment: dev
-    resourceGroupName: 'rg-bicep--$(environment)-001'
     strategy: 
       runOnce:
         deploy:
