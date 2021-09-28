@@ -3,8 +3,7 @@
 @description('The environment name.')
 param environment string = 'prod'
 
-@description('The location into which the resources should be deployed.')
-param location string = 'test'
+var location = resourceGroup().location
 
 var storageAccountName = 'stbicep${environment}001'
 

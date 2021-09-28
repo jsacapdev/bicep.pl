@@ -7,6 +7,7 @@ pool:
 variables:
   azureSubscription: 'rg-bicep-dev-001-sp'  
   productName: arm
+  location: 'westeurope'
 
 stages:
 - stage: Build
@@ -43,6 +44,7 @@ stages:
   - deployment: DeployInfrastructure
     displayName: Deploy Infrastructure
     environment: dev
+    resourceGroupName: 'rg-bicep--$(environment)-001'
     strategy: 
       runOnce:
         deploy:
@@ -52,7 +54,9 @@ stages:
             inputs:
               azureSubscription: $(azureSubscription)
               scriptType: pscore
-              scriptLocation: 'inlineScript'              
-              inlineScript: 'ls -al'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az -v
+                az group create -n $(resourceGroupName) -l $(location)
               workingDirectory: '../$(productName)'
             condition: always()

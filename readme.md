@@ -23,8 +23,7 @@ az group create -n rg-bicep-dev-001 -l westeurope --debug
 az deployment group create `
 -f ./main.bicep `
 -g rg-bicep-dev-001 `
---parameters location=westeurope `
-environment=dev `
+--parameters environment=dev `
 --debug
 
 $var = (az deployment group create `
