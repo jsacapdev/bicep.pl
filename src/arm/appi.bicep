@@ -14,3 +14,5 @@ resource appi 'Microsoft.Insights/components@2020-02-02' = {
     Application_Type: 'web'
   }
 }
+
+output applicationInsightsInstrumentationKey string = appi.properties.InstrumentationKey
