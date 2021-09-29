@@ -4,6 +4,12 @@ param location string = 'test'
 @description('The name of the function app plan.')
 param functionAppPlanName string = 'test'
 
+@description('The name of the function app.')
+param functionAppName string = 'test'
+
+@description('The application insights instrumentation key.')
+param applicationInsightsInstrumentationKey string = 'test'
+
 @description('The name of the function app sku.')
 param functionAppPlanSku string = 'P1v2'
 
@@ -27,5 +33,28 @@ resource plan 'Microsoft.Web/serverfarms@2021-01-01' = {
   properties: {
     maximumElasticWorkerCount: 1
     reserved: isReserved
+  }
+}
+
+resource functionApp 'Microsoft.Web/sites@2021-01-01' = {
+  location: location
+  name: functionAppName
+  kind: isReserved ? 'functionapp,linux' : 'functionapp'
+  dependsOn: [
+    plan
+  ]
+  properties: {
+    serverFarmId: plan.id
+    reserved: isReserved
+    siteConfig: {
+      functionsRuntimeScaleMonitoringEnabled: true
+      linuxFxVersion: isReserved ? 'dotnet|3.1' : json('null')
+      appSettings: [
+        {
+          name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
+          value: applicationInsightsInstrumentationKey
+        }
+      ]
+    }
   }
 }

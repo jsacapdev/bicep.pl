@@ -17,6 +17,7 @@ var location = resourceGroup().location
 var storageAccountName = 'st${product}${environment}001'
 var applicationInsightsName = 'appi-${product}-${environment}-001'
 var functionAppPlanName = 'plan-${product}-${environment}-001'
+var functionAppName = 'function-${product}-${environment}-001'
 
 // application insights
 module appi './appi.bicep' = {
@@ -42,6 +43,8 @@ module function './function.bicep' = {
   params: {
     location: location
     functionAppPlanName: functionAppPlanName
+    functionAppName: functionAppName
+    applicationInsightsInstrumentationKey: appi.outputs.applicationInsightsInstrumentationKey
   }
 }
 
