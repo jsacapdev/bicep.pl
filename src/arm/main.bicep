@@ -45,6 +45,8 @@ module function './function.bicep' = {
     functionAppPlanName: functionAppPlanName
     functionAppName: functionAppName
     applicationInsightsInstrumentationKey: appi.outputs.applicationInsightsInstrumentationKey
+    storageAccountName: stg.outputs.storageAccountName
+    storageAccountKey: stg.outputs.storageAccountPrimaryKey
   }
 }
 

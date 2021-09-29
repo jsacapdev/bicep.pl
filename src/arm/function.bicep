@@ -10,6 +10,14 @@ param functionAppName string = 'test'
 @description('The application insights instrumentation key.')
 param applicationInsightsInstrumentationKey string = 'test'
 
+
+@description('The storage account name.')
+param storageAccountName string = 'test'
+
+@description('The storage account key.')
+@secure()
+param storageAccountKey string
+
 @description('The name of the function app sku.')
 param functionAppPlanSku string = 'P1v2'
 
@@ -53,6 +61,22 @@ resource functionApp 'Microsoft.Web/sites@2021-01-01' = {
         {
           name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
           value: applicationInsightsInstrumentationKey
+        }
+        {
+          name: 'AzureWebJobsStorage'
+          value: 'DefaultEndpointsProtocol=https;AccountName=${storageAccountName};AccountKey=${storageAccountKey}'
+        }
+        {
+          name: 'FUNCTIONS_EXTENSION_VERSION'
+          value: '~3'
+        }
+        {
+          name: 'FUNCTIONS_WORKER_RUNTIME'
+          value: 'dotnet'
+        }
+        {
+          name: 'WEBSITE_VNET_ROUTE_ALL'
+          value: '1'
         }
       ]
     }
