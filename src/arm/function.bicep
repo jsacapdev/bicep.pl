@@ -55,7 +55,6 @@ resource functionApp 'Microsoft.Web/sites@2021-01-01' = {
     serverFarmId: plan.id
     reserved: isReserved
     siteConfig: {
-      functionsRuntimeScaleMonitoringEnabled: true
       linuxFxVersion: isReserved ? 'dotnet|3.1' : json('null')
       appSettings: [
         {
