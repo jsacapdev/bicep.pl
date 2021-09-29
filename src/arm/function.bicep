@@ -10,7 +10,7 @@ param functionAppPlanSku string = 'P1v2'
 @description('The name of the function app tier.')
 param functionAppPlanTier string = 'PremiumV2'
 
-param functionPlanOS string = 'Linux'
+param functionPlanOS string = 'Windows'
 
 var isReserved = (functionPlanOS == 'Linux') ? true : false
 
