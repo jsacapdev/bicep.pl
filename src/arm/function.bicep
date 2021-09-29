@@ -56,6 +56,7 @@ resource functionApp 'Microsoft.Web/sites@2021-01-01' = {
     reserved: isReserved
     siteConfig: {
       linuxFxVersion: isReserved ? 'dotnet|3.1' : json('null')
+      alwaysOn: true
       appSettings: [
         {
           name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
