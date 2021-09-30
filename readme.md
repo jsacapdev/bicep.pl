@@ -36,3 +36,9 @@ storageAccountName=stbicep001 `
 | ConvertFrom-Json)
 
 ```
+
+get app settings
+
+``` pwsh
+func azure functionapp fetch-app-settings function-bicep-dev-001 --debug
+```

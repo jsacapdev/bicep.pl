@@ -6,7 +6,7 @@ pool:
 
 variables:
   azureSubscription: 'rg-bicep-dev-001-sp'  
-  productName: arm
+  productName: bicep
   location: 'westeurope'
 
 stages:
@@ -26,16 +26,24 @@ stages:
         TargetFolder: '$(build.artifactstagingdirectory)/arm'
 
     - task: PublishBuildArtifacts@1
-      displayName: 'publish function api artifacts'
+      displayName: 'publish arm artifacts'
       inputs:
-        pathToPublish: '$(Build.ArtifactStagingDirectory)/arm'
+        pathToPublish: '$(build.artifactstagingdirectory)/arm'
         ArtifactName: $(productName)
 
-    - task: PublishBuildArtifacts@1
-      displayName: 'publish test artifacts'
+    - task: DotNetCoreCLI@2
+      displayName: 'publish function api'
       inputs:
-        pathToPublish: '$(Build.ArtifactStagingDirectory)'
-        artifactName: 'arm'
+        command: publish
+        publishWebProjects: false
+        projects: ./src/function.api/function.csproj
+        arguments: '-c release -o $(build.artifactstagingdirectory)/apis'        
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'publish artifacts'
+      inputs:
+        pathToPublish: '$(build.artifactstagingdirectory)'
+        artifactName: $(productName)
         publishLocation: 'Container'
 
 - stage: Deploy

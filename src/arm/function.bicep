@@ -73,7 +73,7 @@ resource functionApp 'Microsoft.Web/sites@2021-01-01' = {
         }
         {
           name: 'FUNCTIONS_WORKER_RUNTIME'
-          value: 'dotnet'
+          value: 'dotnet-isolated'
         }
         {
           name: 'WEBSITE_VNET_ROUTE_ALL'
