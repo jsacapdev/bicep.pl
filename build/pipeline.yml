@@ -67,6 +67,7 @@ stages:
               scriptType: pscore
               scriptLocation: 'inlineScript'
               inlineScript: |
+                ls -al
                 az -v
                 az group create -n $(resourceGroupName) -l $(location)
                 az deployment group create -f ./main.bicep -g $(resourceGroupName) --parameters environment=$(environment)
@@ -79,5 +80,5 @@ stages:
               azureSubscription: $(azureSubscription)
               scriptLocation: inlineScript
               scriptType: pscore
-              inlineScript: 'az webapp deployment source config-zip -g "$(resourceGroupName)" -n "$(functionAppName)" --src ../$(productName)/$(zipFileName)'
+              inlineScript: 'az webapp deployment source config-zip -g "$(resourceGroupName)" -n "$(functionAppName)" --src ../$(productName)/apis/function.api.zip'
             condition: always()
