@@ -49,6 +49,7 @@ module network './network.bicep' = {
     applicationVirtualNetworkName: applicationVirtualNetworkName
     applicationFunctionSubnetName: functionSubnetName
     applicationPrivateEndpointSubnetName: privateEndpointSubnetName
+    storageAccountName: storageAccountName
   }
 }
 
