@@ -19,6 +19,8 @@ param applicationFunctionSubnetAddressPrefix string = '10.100.0.0/24'
 @description('The subnet address for the function app.')
 param applicationPrivateEndpointSubnetAddressPrefix string = '10.100.1.0/24'
 
+var privateStorageFileDnsZoneName = 'privatelink.file.${environment().suffixes.storage}'
+
 resource virtualNetwork 'Microsoft.Network/virtualNetworks@2021-02-01' = {
   name: applicationVirtualNetworkName
   location: location
@@ -55,4 +57,10 @@ resource virtualNetwork 'Microsoft.Network/virtualNetworks@2021-02-01' = {
       }
     ]
   }
+}
+
+// -- Private DNS Zones --
+resource storageFileDnsZone 'Microsoft.Network/privateDnsZones@2020-06-01' = {
+  name: privateStorageFileDnsZoneName
+  location: 'global'
 }
