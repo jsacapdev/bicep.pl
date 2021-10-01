@@ -36,11 +36,13 @@ resource plan 'Microsoft.Web/serverfarms@2021-01-01' = {
     tier: functionAppPlanTier
     size: functionAppPlanSku
     family: functionAppPlanSku
+    capacity: 3
   }
   kind: 'elastic'
   properties: {
     maximumElasticWorkerCount: 1
     reserved: isReserved
+    zoneRedundant: true
   }
 }
 
