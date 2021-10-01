@@ -21,6 +21,7 @@ var functionAppName = 'function-${product}-${environment}-001'
 
 var applicationVirtualNetworkName = 'vnet-app-${environment}-${location}-001'
 var functionSubnetName = 'snet-app-${environment}-${location}-001'
+var privateEndpointSubnetName = 'snet-app-${environment}-${location}-001'
 
 // application insights
 module appi './appi.bicep' = {
@@ -46,6 +47,8 @@ module network './network.bicep' = {
   params: {
     location: location
     applicationVirtualNetworkName: applicationVirtualNetworkName
+    applicationFunctionSubnetName: functionSubnetName
+    applicationPrivateEndpointSubnetName: privateEndpointSubnetName
   }
 }
 
