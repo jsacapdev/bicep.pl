@@ -1,0 +1,5 @@
+###
+GET http://localhost:7071/api/hc HTTP/1.1
+
+###
+GET https://function-bicep-dev-001.azurewebsites.net/api/hc HTTP/1.1

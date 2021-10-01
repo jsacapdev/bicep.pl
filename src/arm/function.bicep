@@ -58,6 +58,7 @@ resource functionApp 'Microsoft.Web/sites@2021-01-01' = {
       linuxFxVersion: isReserved ? 'dotnet|3.1' : json('null')
       alwaysOn: true
       vnetRouteAllEnabled: true
+      healthCheckPath: 'api/hc'
       appSettings: [
         {
           name: 'APPINSIGHTS_INSTRUMENTATIONKEY'

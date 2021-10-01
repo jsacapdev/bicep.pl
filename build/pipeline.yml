@@ -75,7 +75,7 @@ stages:
             condition: always()
 
           - task: AzureCLI@2
-            displayName: "deploy api"
+            displayName: 'deploy api'
             inputs:
               azureSubscription: $(azureSubscription)
               scriptLocation: inlineScript
