@@ -19,9 +19,9 @@ var applicationInsightsName = 'appi-${product}-${environment}-001'
 var functionAppPlanName = 'plan-${product}-${environment}-001'
 var functionAppName = 'function-${product}-${environment}-001'
 
-var applicationVirtualNetworkName = 'vnet-app-${environment}-${location}-001'
-var functionSubnetName = 'snet-app-${environment}-${location}-001'
-var privateEndpointSubnetName = 'snet-app-${environment}-${location}-002'
+var applicationVirtualNetworkName = 'vnet-${environment}-${location}-001'
+var functionSubnetName = 'snet-${environment}-${location}-001'
+var privateEndpointSubnetName = 'snet-${environment}-${location}-002'
 
 // application insights
 module appi './appi.bicep' = {
