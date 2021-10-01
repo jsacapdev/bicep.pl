@@ -42,7 +42,6 @@ resource plan 'Microsoft.Web/serverfarms@2021-01-01' = {
   properties: {
     maximumElasticWorkerCount: 1
     reserved: isReserved
-    zoneRedundant: true
   }
 }
 
