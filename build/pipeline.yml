@@ -51,7 +51,7 @@ stages:
   variables:
     resourceGroupName: 'rg-bicep-$(environment)-001'
     environment: dev
-    functionAppName: 'function-$(product)-$(environment)-001'
+    functionAppName: 'function-$(productName)-$(environment)-001'
   jobs:
   - deployment: DeployInfrastructure
     displayName: Deploy Infrastructure
