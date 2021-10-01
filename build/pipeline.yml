@@ -51,6 +51,7 @@ stages:
   variables:
     resourceGroupName: 'rg-bicep-$(environment)-001'
     environment: dev
+    functionAppName: 'function-${product}-${environment}-001'
   jobs:
   - deployment: DeployInfrastructure
     displayName: Deploy Infrastructure
@@ -70,4 +71,13 @@ stages:
                 az group create -n $(resourceGroupName) -l $(location)
                 az deployment group create -f ./main.bicep -g $(resourceGroupName) --parameters environment=$(environment)
               workingDirectory: '../$(productName)'
+            condition: always()
+
+          - task: AzureCLI@2
+            displayName: "deploy api"
+            inputs:
+              azureSubscription: $(azureSubscription)
+              scriptLocation: inlineScript
+              scriptType: pscore
+              inlineScript: 'az webapp deployment source config-zip -g "$(resourceGroupName)" -n "$(functionAppName)" --src ../$(productName)/$(zipFileName)'
             condition: always()
