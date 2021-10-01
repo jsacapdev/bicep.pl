@@ -19,6 +19,8 @@ var applicationInsightsName = 'appi-${product}-${environment}-001'
 var functionAppPlanName = 'plan-${product}-${environment}-001'
 var functionAppName = 'function-${product}-${environment}-001'
 
+var applicationVirtualNetworkName = 'vnet-${environment}-${location}-001'
+
 // application insights
 module appi './appi.bicep' = {
   name: 'appiDeploy'
@@ -34,6 +36,15 @@ module stg './storage.bicep' = {
   params: {
     location: location
     storageAccountName: storageAccountName
+  }
+}
+
+// storage account
+module network './network.bicep' = {
+  name: 'networkDeploy'
+  params: {
+    location: location
+    applicationVirtualNetworkName: applicationVirtualNetworkName
   }
 }
 

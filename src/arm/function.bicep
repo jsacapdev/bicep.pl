@@ -10,7 +10,6 @@ param functionAppName string = 'test'
 @description('The application insights instrumentation key.')
 param applicationInsightsInstrumentationKey string = 'test'
 
-
 @description('The storage account name.')
 param storageAccountName string = 'test'
 
