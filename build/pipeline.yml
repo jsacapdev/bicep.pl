@@ -23,12 +23,12 @@ stages:
       inputs:
         SourceFolder: src/arm
         Contents: '*'
-        TargetFolder: '$(build.artifactstagingdirectory)/arm'
+        TargetFolder: '$(build.artifactstagingdirectory)/arm/application'
 
     - task: PublishBuildArtifacts@1
       displayName: 'publish arm artifacts'
       inputs:
-        pathToPublish: '$(build.artifactstagingdirectory)/arm'
+        pathToPublish: '$(build.artifactstagingdirectory)/arm/application'
         ArtifactName: $(productName)
 
     - task: DotNetCoreCLI@2
